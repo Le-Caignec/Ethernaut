@@ -1,0 +1,15 @@
+{
+  "name": "hardhat-project",
+  "version": "1.0.0",
+  "description": "Level Coin Flip",
+  "scripts": {
+    "hack": "hardhat compile && hardhat run ./scripts/hack.ts"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^1.0.2",
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@openzeppelin/contracts": "^4.9.2",
+    "ethers": "^5.7.2",
+    "hardhat": "^2.15.0"
+  }
+}

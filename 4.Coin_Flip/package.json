@@ -1,0 +1,16 @@
+{
+  "name": "4.coin_flip",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "hack": "hardhat compile && hardhat run scripts/hack.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "hardhat": "^2.16.0"
+  }
+}
