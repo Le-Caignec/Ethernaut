@@ -1,10 +1,14 @@
 {
-  "name": "3CoinFlip",
+  "name": "4.Telephone",
   "version": "1.0.0",
-  "description": "Level 3: Coin Flip",
+  "description": "Level 4: Telephone",
+  "main": "index.js",
   "scripts": {
     "hack": "hardhat compile && hardhat run scripts/hack.ts"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^1.0.2",
     "@nomiclabs/hardhat-ethers": "^2.2.3",
