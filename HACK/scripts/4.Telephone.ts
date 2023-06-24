@@ -15,9 +15,8 @@ async function hack() {
   const attackerContract = await attackerFactory.deploy(contract.address);
 
   //get owner from private key
-  const privateKey = hre.network.config.accounts as string[];
-  const wallet = new ethers.Wallet(privateKey[0]).address;
-  console.log("OWNER: ", wallet);
+  const [wallet] = await ethers.getSigners();
+  console.log("OWNER: ", wallet.address);
 
   // check owner address before hack
   let owner = await contract.owner();
@@ -29,7 +28,7 @@ async function hack() {
   // check if owner is changed
   const ownerAfterHack = await contract.owner();
   console.log("Contract OWNER After Hack: ", ownerAfterHack);
-  if (ownerAfterHack === wallet) {
+  if (ownerAfterHack === wallet.address) {
     console.log("HACK");
   }
 }

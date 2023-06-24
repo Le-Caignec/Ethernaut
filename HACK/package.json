@@ -1,7 +1,7 @@
 {
-  "name": "3CoinFlip",
+  "name": "Ethernaut Hacking Game",
   "version": "1.0.0",
-  "description": "Level 3: Coin Flip",
+  "description": "Ethernaut Hacking Game",
   "scripts": {
     "hack": "hardhat compile && hardhat run scripts/hack.ts"
   },
